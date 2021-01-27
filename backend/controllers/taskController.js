@@ -51,7 +51,31 @@ const toggleTask = async (req, res, next) => {
   }
 }
 
+const updateTask = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const { description } = req.body
+
+    // Update description field
+    const updatedTask = await Task.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: { description }
+      }, { new: true }
+    )
+
+    if (!updatedTask) {
+      return res.status(400).json({ msg: 'This task was not found' })
+    }
+
+    res.json(updatedTask)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   addTask,
-  toggleTask
+  toggleTask,
+  updateTask
 }
