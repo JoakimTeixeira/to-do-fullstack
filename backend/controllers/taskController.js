@@ -74,8 +74,25 @@ const updateTask = async (req, res, next) => {
   }
 }
 
+const deleteTask = async (req, res, next) => {
+  try {
+    const { id } = req.params
+
+    const deletedTask = await Task.findByIdAndDelete(id)
+
+    if (!deletedTask) {
+      return res.status(400).json({ msg: 'This task was not found' })
+    }
+
+    res.json(deletedTask)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   addTask,
   toggleTask,
-  updateTask
+  updateTask,
+  deleteTask
 }
