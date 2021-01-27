@@ -1,6 +1,7 @@
 const router = require('express').Router()
-const { addTask } = require('../controllers/taskController')
+const { addTask, toggleTask } = require('../controllers/taskController')
 
 router.post('/register', addTask)
+router.put('/toggle/:id', toggleTask)
 
 module.exports = router
