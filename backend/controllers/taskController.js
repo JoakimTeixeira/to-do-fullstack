@@ -1,5 +1,15 @@
 const Task = require('../models/taskModel')
 
+const getTasks = async (req, res, next) => {
+  try {
+    const tasks = await Task.find({})
+
+    res.json(tasks)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
 const addTask = async (req, res, next) => {
   try {
     const { title, description, isFinished } = req.body
@@ -91,6 +101,7 @@ const deleteTask = async (req, res, next) => {
 }
 
 module.exports = {
+  getTasks,
   addTask,
   toggleTask,
   updateTask,
