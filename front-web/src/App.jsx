@@ -1,10 +1,12 @@
 import React from 'react';
+import TaskForm from 'components/TaskForm';
+import { Container } from 'react-bootstrap';
 
 function App() {
   return (
-    <>
-      <h1>To-do fullstack</h1>
-    </>
+    <Container className="w-50">
+      <TaskForm />
+    </Container>
   );
 }
 
