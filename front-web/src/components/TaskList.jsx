@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import { TaskContext } from 'contexts/TaskContext';
 
 export const TaskList = () => {
-  const { tasks, fetchTasks } = useContext(TaskContext);
+  const { tasks, fetchTasks, handleDelete } = useContext(TaskContext);
 
   useEffect(() => {
     const fetchDatabase = async () => {
@@ -39,7 +39,11 @@ export const TaskList = () => {
                   <td style={{ maxWidth: '100px' }}>
                     <Row className="w-100">
                       <Col md={6}>
-                        <button type="submit" className="btn btn-danger m-1">
+                        <button
+                          type="submit"
+                          className="btn btn-danger m-1"
+                          onClick={() => handleDelete(id)}
+                        >
                           <i className="fas fa-trash-alt" />
                         </button>
                       </Col>
