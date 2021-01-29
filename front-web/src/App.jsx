@@ -8,12 +8,8 @@ function App() {
     <Container>
       <section className="col-12 col-lg-6 mx-auto">
         <TaskContextProvider>
-          <article>
-            <TaskForm />
-          </article>
-          <article>
-            <TaskList />
-          </article>
+          <TaskForm />
+          <TaskList />
         </TaskContextProvider>
       </section>
     </Container>
