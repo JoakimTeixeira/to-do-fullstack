@@ -4,7 +4,16 @@ const getTasks = async (req, res, next) => {
   try {
     const tasks = await Task.find({})
 
-    res.json(tasks)
+    const newTasks = tasks.map((task) => {
+      return {
+        id: task._id,
+        title: task.title,
+        description: task.description,
+        isFinished: task.isFinished
+      }
+    })
+
+    res.json(newTasks)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
