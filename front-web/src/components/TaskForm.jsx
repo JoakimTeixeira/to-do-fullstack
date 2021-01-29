@@ -1,12 +1,10 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+import { TaskContext } from 'contexts/TaskContext';
 
-export const TaskForm = ({ addTasks }) => {
-  TaskForm.propTypes = {
-    addTasks: PropTypes.func.isRequired,
-  };
+export const TaskForm = () => {
+  const { addTasks } = useContext(TaskContext);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');

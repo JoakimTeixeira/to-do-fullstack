@@ -1,19 +1,10 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { TaskContext } from 'contexts/TaskContext';
 
-export const TaskList = ({ tasks, fetchTasks }) => {
-  TaskList.propTypes = {
-    tasks: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string,
-        description: PropTypes.string,
-        isFinished: PropTypes.bool,
-      })
-    ).isRequired,
-    fetchTasks: PropTypes.func.isRequired,
-  };
+export const TaskList = () => {
+  const { tasks, fetchTasks } = useContext(TaskContext);
 
   useEffect(() => {
     const fetchDatabase = async () => {
