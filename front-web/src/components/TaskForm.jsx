@@ -22,7 +22,7 @@ export const TaskForm = () => {
     setDescription('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (title && description) {
@@ -32,12 +32,11 @@ export const TaskForm = () => {
         isFinished: false,
       };
 
-      addTasks(newTask);
-
-      axios.post('http://localhost:3001/tasks/register', newTask, {
+      const responseTask = await axios.post('http://localhost:3001/tasks/register', newTask, {
         headers: { 'Content-Type': 'application/json' },
       });
 
+      addTasks(responseTask.data);
       cleanFields();
     }
   };

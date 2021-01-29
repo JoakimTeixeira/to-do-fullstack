@@ -27,9 +27,9 @@ export const TaskList = () => {
           </thead>
           <tbody>
             {tasks.map((task) => {
-              const { title, description, _id } = task;
+              const { title, description, id } = task;
               return (
-                <tr key={_id}>
+                <tr key={id}>
                   <td style={{ minWidth: '50px', maxWidth: '120px', wordWrap: 'break-word' }}>
                     {title}
                   </td>
