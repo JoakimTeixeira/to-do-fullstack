@@ -6,7 +6,7 @@ import { TaskContextProvider } from 'contexts/TaskContext';
 function App() {
   return (
     <Container>
-      <section className="col-12 col-lg-6 mx-auto">
+      <section className="col-12 col-lg-7 mx-auto">
         <TaskContextProvider>
           <TaskForm />
           <TaskList />

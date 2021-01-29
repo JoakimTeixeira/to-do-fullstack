@@ -15,7 +15,7 @@ export const TaskList = () => {
   }, []);
 
   return (
-    <table className="table table-bordered table-striped table-responsive-sm bg-white mb-5">
+    <table className="table table-bordered table-striped bg-white mb-5">
       {tasks.length > 0 && (
         <>
           <thead>
@@ -30,13 +30,13 @@ export const TaskList = () => {
               const { title, description, id } = task;
               return (
                 <tr key={id}>
-                  <td style={{ minWidth: '50px', maxWidth: '120px', wordWrap: 'break-word' }}>
+                  <td style={{ width: '30%', maxWidth: '70px', wordWrap: 'break-word' }}>
                     {title}
                   </td>
-                  <td style={{ minWidth: '70px', maxWidth: '200px', wordWrap: 'break-word' }}>
+                  <td style={{ width: '47%', maxWidth: '100px', wordWrap: 'break-word' }}>
                     {description}
                   </td>
-                  <td style={{ maxWidth: '100px' }}>
+                  <td style={{ width: '23%', maxWidth: '40px' }}>
                     <Row className="w-100">
                       <Col md={6}>
                         <button
