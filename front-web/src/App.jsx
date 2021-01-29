@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { TaskForm, TaskList } from 'components';
+import { TaskForm } from 'components/TaskForm';
 import { TaskContextProvider } from 'contexts/TaskContext';
 
 function App() {
@@ -9,7 +9,6 @@ function App() {
       <section className="col-12 col-lg-7 mx-auto">
         <TaskContextProvider>
           <TaskForm />
-          <TaskList />
         </TaskContextProvider>
       </section>
     </Container>

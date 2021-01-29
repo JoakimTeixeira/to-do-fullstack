@@ -2,9 +2,15 @@ import axios from 'axios';
 import React, { useContext, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { TaskContext } from 'contexts/TaskContext';
+import PropTypes from 'prop-types';
 
-export const TaskList = () => {
-  const { tasks, fetchTasks, handleDelete } = useContext(TaskContext);
+export const TaskList = ({ setTitle, setDescription }) => {
+  TaskList.propTypes = {
+    setTitle: PropTypes.func.isRequired,
+    setDescription: PropTypes.func.isRequired,
+  };
+
+  const { tasks, fetchTasks, handleDelete, handleEditForm } = useContext(TaskContext);
 
   useEffect(() => {
     const fetchDatabase = async () => {
@@ -48,7 +54,11 @@ export const TaskList = () => {
                         </button>
                       </Col>
                       <Col md={6}>
-                        <button type="submit" className="btn btn-dark m-1">
+                        <button
+                          type="submit"
+                          className="btn btn-dark m-1"
+                          onClick={() => handleEditForm(task, setTitle, setDescription)}
+                        >
                           <i className="fas fa-edit" />
                         </button>
                       </Col>
