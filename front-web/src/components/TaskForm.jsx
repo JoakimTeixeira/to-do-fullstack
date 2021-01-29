@@ -1,8 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-const TaskForm = () => {
+export const TaskForm = ({ addTasks }) => {
+  TaskForm.propTypes = {
+    addTasks: PropTypes.func.isRequired,
+  };
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -29,6 +34,8 @@ const TaskForm = () => {
         isFinished: false,
       };
 
+      addTasks(newTask);
+
       axios.post('http://localhost:3001/tasks/register', newTask, {
         headers: { 'Content-Type': 'application/json' },
       });
@@ -38,7 +45,7 @@ const TaskForm = () => {
   };
 
   return (
-    <Form className="mt-5 bg-light p-5">
+    <Form className="mt-5 mb-5 bg-light p-5">
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>
         <Form.Control type="text" value={title} onChange={(e) => handleTitle(e)} />
@@ -54,5 +61,3 @@ const TaskForm = () => {
     </Form>
   );
 };
-
-export default TaskForm;
