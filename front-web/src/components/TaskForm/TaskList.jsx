@@ -14,7 +14,7 @@ export const TaskList = ({ setTitle, setDescription }) => {
 
   useEffect(() => {
     const fetchDatabase = async () => {
-      const databaseTasks = await axios.get('http://localhost:3001/tasks/');
+      const databaseTasks = await axios.get('https://to-do-fullstack-api.herokuapp.com/tasks/');
       fetchTasks(databaseTasks.data);
     };
     fetchDatabase();

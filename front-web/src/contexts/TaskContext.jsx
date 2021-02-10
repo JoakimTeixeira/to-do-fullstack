@@ -26,7 +26,7 @@ export const TaskContextProvider = ({ children }) => {
   };
 
   const handleDelete = (id) => {
-    Axios.delete(`http://localhost:3001/tasks/${id}`, null);
+    Axios.delete(`https://to-do-fullstack-api.herokuapp.com/tasks/${id}`, null);
     const newTasks = tasks.filter((task) => task.id !== id);
     setTasks(newTasks);
   };

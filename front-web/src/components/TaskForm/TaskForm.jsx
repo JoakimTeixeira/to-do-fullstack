@@ -33,14 +33,14 @@ export const TaskForm = () => {
 
   const updateEditedTask = async () => {
     await Axios.put(
-      `http://localhost:3001/tasks/${cachedId.current}`,
+      `https://to-do-fullstack-api.herokuapp.com/tasks/${cachedId.current}`,
       { description },
       {
         headers: { 'Content-Type': 'application/json' },
       }
     );
 
-    const databaseTasks = await Axios.get('http://localhost:3001/tasks/');
+    const databaseTasks = await Axios.get('https://to-do-fullstack-api.herokuapp.com/tasks/');
     fetchTasks(databaseTasks.data);
 
     titleDisable.current.disabled = false;
@@ -60,9 +60,13 @@ export const TaskForm = () => {
       isFinished: false,
     };
 
-    const responseTask = await Axios.post('http://localhost:3001/tasks/register', newTask, {
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const responseTask = await Axios.post(
+      'https://to-do-fullstack-api.herokuapp.com/tasks/register',
+      newTask,
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
 
     addTasks(responseTask.data);
     cleanFields();
