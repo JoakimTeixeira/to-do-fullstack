@@ -1,11 +1,14 @@
 import Axios from 'axios';
 
+const ROOT_API_URL = 'https://to-do-fullstack-api.herokuapp.com';
+const TASKS_API = 'tasks';
+
 const putTask = async (description, id) => {
   const taskId = id.current;
 
   try {
     await Axios.put(
-      `https://to-do-fullstack-api.herokuapp.com/tasks/${taskId}`,
+      `${ROOT_API_URL}/${TASKS_API}/${taskId}`,
       { description },
       {
         headers: { 'Content-Type': 'application/json' },
@@ -18,7 +21,7 @@ const putTask = async (description, id) => {
 
 const fetchTasks = async () => {
   try {
-    const response = await Axios.get('https://to-do-fullstack-api.herokuapp.com/tasks/');
+    const response = await Axios.get(`${ROOT_API_URL}/${TASKS_API}/`);
     const allTasks = response.data;
 
     return allTasks;
@@ -29,13 +32,9 @@ const fetchTasks = async () => {
 
 const postTask = async (newTask) => {
   try {
-    const response = await Axios.post(
-      'https://to-do-fullstack-api.herokuapp.com/tasks/register',
-      newTask,
-      {
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    const response = await Axios.post(`${ROOT_API_URL}/${TASKS_API}/register`, newTask, {
+      headers: { 'Content-Type': 'application/json' },
+    });
     const task = response.data;
 
     return task;
@@ -46,7 +45,7 @@ const postTask = async (newTask) => {
 
 const deleteTask = async (id) => {
   try {
-    await Axios.delete(`https://to-do-fullstack-api.herokuapp.com/tasks/${id}`, null);
+    await Axios.delete(`${ROOT_API_URL}/${TASKS_API}/${id}`, null);
   } catch (error) {
     throw new Error('Unable to delete task');
   }
