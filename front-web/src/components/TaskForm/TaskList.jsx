@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React, { useContext, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { TaskContext } from 'contexts/TaskContext';
 import PropTypes from 'prop-types';
+import { fetchTasks } from 'services/taskAPI';
 
 export const TaskList = ({ setTitle, setDescription }) => {
   TaskList.propTypes = {
@@ -10,14 +10,14 @@ export const TaskList = ({ setTitle, setDescription }) => {
     setDescription: PropTypes.func.isRequired,
   };
 
-  const { tasks, fetchTasks, handleDelete, handleEditForm } = useContext(TaskContext);
+  const { tasks, addTasks, handleDelete, handleEditForm } = useContext(TaskContext);
 
   useEffect(() => {
-    const fetchDatabase = async () => {
-      const databaseTasks = await axios.get('https://to-do-fullstack-api.herokuapp.com/tasks/');
-      fetchTasks(databaseTasks.data);
+    const fetchAndAddTasks = async () => {
+      const databaseTasks = await fetchTasks();
+      addTasks(databaseTasks);
     };
-    fetchDatabase();
+    fetchAndAddTasks();
   }, []);
 
   return (

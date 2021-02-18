@@ -1,13 +1,13 @@
-import Axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { TaskContext } from 'contexts/TaskContext';
+import { putTask, fetchTasks, postTask } from 'services/taskAPI';
 import { TaskList } from './TaskList';
 
 export const TaskForm = () => {
   const {
+    addTask,
     addTasks,
-    fetchTasks,
     updateIsEdit,
     isEdit,
     cachedId,
@@ -32,16 +32,10 @@ export const TaskForm = () => {
   };
 
   const updateEditedTask = async () => {
-    await Axios.put(
-      `https://to-do-fullstack-api.herokuapp.com/tasks/${cachedId.current}`,
-      { description },
-      {
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    await putTask(description, cachedId);
 
-    const databaseTasks = await Axios.get('https://to-do-fullstack-api.herokuapp.com/tasks/');
-    fetchTasks(databaseTasks.data);
+    const databaseTasks = await fetchTasks();
+    addTasks(databaseTasks);
 
     titleDisable.current.disabled = false;
     formSubmitButton.current.innerText = 'Submit';
@@ -60,15 +54,9 @@ export const TaskForm = () => {
       isFinished: false,
     };
 
-    const responseTask = await Axios.post(
-      'https://to-do-fullstack-api.herokuapp.com/tasks/register',
-      newTask,
-      {
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    const databaseTask = await postTask(newTask);
 
-    addTasks(responseTask.data);
+    addTask(databaseTask);
     cleanFields();
   };
 

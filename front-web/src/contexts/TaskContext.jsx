@@ -1,6 +1,6 @@
 import React, { createContext, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import Axios from 'axios';
+import { deleteTask } from 'services/taskAPI';
 
 export const TaskContext = createContext();
 
@@ -13,20 +13,20 @@ export const TaskContextProvider = ({ children }) => {
   const formSubmitButton = useRef('');
   const titleDisable = useRef(false);
 
-  const addTasks = (newTask) => {
+  const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
+  };
+
+  const addTasks = (databaseTasks) => {
+    setTasks(databaseTasks);
   };
 
   const updateIsEdit = (boolean) => {
     setIsEdit(boolean);
   };
 
-  const fetchTasks = (databaseTasks) => {
-    setTasks(databaseTasks);
-  };
-
-  const handleDelete = (id) => {
-    Axios.delete(`https://to-do-fullstack-api.herokuapp.com/tasks/${id}`, null);
+  const handleDelete = async (id) => {
+    await deleteTask(id);
     const newTasks = tasks.filter((task) => task.id !== id);
     setTasks(newTasks);
   };
@@ -47,9 +47,9 @@ export const TaskContextProvider = ({ children }) => {
     <TaskContext.Provider
       value={{
         tasks,
+        addTask,
         addTasks,
         updateIsEdit,
-        fetchTasks,
         handleDelete,
         handleEditForm,
         isEdit,
