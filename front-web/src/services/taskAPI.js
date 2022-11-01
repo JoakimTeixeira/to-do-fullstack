@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const ROOT_API_URL = 'https://to-do-fullstack-api.herokuapp.com';
+const ROOT_API_URL = process.env.REACT_APP_BACKEND_API || 'http://localhost:3001';
 const TASKS_API = 'tasks';
 
 const putTask = async (description, id) => {
