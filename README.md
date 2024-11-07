@@ -1,4 +1,4 @@
-# To-do fullstack
+# To-do Full-Stack
 
 To-do list made with MERN stack
 
@@ -8,7 +8,7 @@ To-do list made with MERN stack
 
 ## Running the Project
 
-To get started, fork the repository and then run the following commands:
+To get started, fork the repository, clone it, and then run the following commands:
 
     npm install
     npm run start
